@@ -11,7 +11,7 @@ Source1:	logcheck.cron
 Patch:		logcheck.patch
 Patch1:		logcheck-sh.patch
 Patch2:		logcheck-1.1.1-crond-ignore.patch
-#FIX http://www.mandrakesoft.com/security/advisories?name=MDKSA-2004:155
+#FIX http://www.mandriva.com/security/advisories?name=MDKSA-2004:155
 Patch3:		logcheck-1.1.1-CAN-2004-0404.patch
 Requires:	grep
 
