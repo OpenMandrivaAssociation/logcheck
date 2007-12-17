@@ -15,7 +15,6 @@ Patch2:		logcheck-1.1.1-crond-ignore.patch
 Patch3:		logcheck-1.1.1-CAN-2004-0404.patch
 Requires:	grep
 
-BuildRoot:	%_tmppath/%name-%version-%release-root
 
 %description
 Logcheck is a software package that is designed to automatically run and check 
