@@ -1,7 +1,7 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.1.1
-Release:	%mkrel 12
+Release:	%mkrel 13
 License:	GPL
 Group:		Monitoring
 URL:		http://www.psionic.com
