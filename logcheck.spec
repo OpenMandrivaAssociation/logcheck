@@ -39,7 +39,7 @@ firewall package.  TIS has granted permission for me to clone this package.
 export INSTALLDIR=%{buildroot}%{_sysconfdir}/logcheck
 export INSTALLDIR_BIN=%{buildroot}%{_bindir}
 export INSTALLDIR_SH=%{buildroot}%{_bindir}
-export TMPDIR=%{buildroot}%{_localstatedir}/%{name}
+export TMPDIR=%{buildroot}%{_localstatedir}/lib/%{name}
 chmod -R go+r *
 export CFLAGS=$RPM_OPT_FLAGS
 
@@ -48,7 +48,7 @@ install -d $INSTALLDIR_BIN
 install -d $INSTALLDIR_SH
 install -d $TMPDIR
 
-make linux TMPDIR=%buildroot%{_localstatedir}/%name
+make linux TMPDIR=%buildroot%{_localstatedir}/lib/%name
 
 # rename files
 pushd %buildroot/%_sysconfdir/logcheck
@@ -67,7 +67,7 @@ rm -fr %buildroot
 %pre
 
 if [ -d /var/logcheck ]; then
-  mv /var/logcheck %{_localstatedir}/logcheck
+  mv /var/logcheck %{_localstatedir}/lib/logcheck
 fi
 
 %files
@@ -81,6 +81,6 @@ fi
 %config(noreplace) %_sysconfdir/logcheck/ignore
 %_bindir/logcheck.sh
 %_bindir/logtail
-%attr(0700,root,root) %dir %{_localstatedir}/%name
+%attr(0700,root,root) %dir %{_localstatedir}/lib/%name
 
 
