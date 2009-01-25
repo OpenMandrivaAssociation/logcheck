@@ -1,21 +1,12 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.1.1
-Release:	%mkrel 14
+Version:	1.2.45
+Release:	%mkrel 1
 License:	GPL
 Group:		Monitoring
-URL:		http://www.psionic.com
-
-Source:		%name-%version.tar.bz2
-Source1:	logcheck.cron
-Patch:		logcheck.patch
-Patch1:		logcheck-sh.patch
-Patch2:		logcheck-1.1.1-crond-ignore.patch
-#FIX http://www.mandriva.com/security/advisories?name=MDKSA-2004:155
-Patch3:		logcheck-1.1.1-CAN-2004-0404.patch
-Requires:	grep
-
-BuildRoot:	%_tmppath/%name-%version-%release-root
+URL:		http://logcheck.org/
+Source:		http://alioth.debian.org/frs/download.php/1677/%{name}_%{version}.tar.gz
+BuildRoot:	%_tmppath/%name-%version
 
 %description
 Logcheck is a software package that is designed to automatically run and check 
@@ -28,59 +19,27 @@ frequentcheck.sh script from the Trusted Information Systems Gauntlet(tm)
 firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
-
 %setup -q
-%patch -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1 -b .can-2004-0404
 
 %install
-export INSTALLDIR=%{buildroot}%{_sysconfdir}/logcheck
-export INSTALLDIR_BIN=%{buildroot}%{_bindir}
-export INSTALLDIR_SH=%{buildroot}%{_bindir}
-export TMPDIR=%{buildroot}%{_localstatedir}/lib/%{name}
-chmod -R go+r *
-export CFLAGS=$RPM_OPT_FLAGS
-
-install -d $INSTALLDIR
-install -d $INSTALLDIR_BIN
-install -d $INSTALLDIR_SH
-install -d $TMPDIR
-
-make linux TMPDIR=%buildroot%{_localstatedir}/lib/%name
-
-# rename files
-pushd %buildroot/%_sysconfdir/logcheck
-  mv -f logcheck.hacking hacking
-  mv -f logcheck.violations violations
-  mv -f logcheck.violations.ignore violations.ignore
-  mv -f logcheck.ignore ignore
-popd
+%makeinstall_std
 
 install -d %buildroot/%_sysconfdir/cron.daily/
-install -m755 %SOURCE1 %buildroot/%_sysconfdir/cron.daily/logcheck
+cat > %buildroot/%_sysconfdir/cron.daily/logcheck <<EOF
+#!/bin/sh
+%{_bindir}/logcheck
+EOF
 
 %clean
 rm -fr %buildroot
 
-%pre
-
-if [ -d /var/logcheck ]; then
-  mv /var/logcheck %{_localstatedir}/lib/logcheck
-fi
-
 %files
-%defattr(-,root,root,0755)
-%doc CHANGES CREDITS INSTALL LICENSE README* systems/linux/README*
+%defattr(-,root,root)
+%doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO
 %config(noreplace) %_sysconfdir/cron.daily/logcheck
-%dir %_sysconfdir/logcheck
-%config(noreplace) %_sysconfdir/logcheck/hacking
-%config(noreplace) %_sysconfdir/logcheck/violations
-%config(noreplace) %_sysconfdir/logcheck/violations.ignore
-%config(noreplace) %_sysconfdir/logcheck/ignore
-%_bindir/logcheck.sh
-%_bindir/logtail
+%config(noreplace) %_sysconfdir/logcheck
+%_sbindir/logcheck
+%_sbindir/logtail
 %attr(0700,root,root) %dir %{_localstatedir}/lib/%name
 
 
