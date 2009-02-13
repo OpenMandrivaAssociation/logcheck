@@ -1,7 +1,7 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.2.45
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
@@ -27,8 +27,9 @@ firewall package.  TIS has granted permission for me to clone this package.
 install -d %buildroot/%_sysconfdir/cron.daily/
 cat > %buildroot/%_sysconfdir/cron.daily/logcheck <<EOF
 #!/bin/sh
-%{_bindir}/logcheck
+%{_sbindir}/logcheck
 EOF
+chmod 755 %buildroot/%_sysconfdir/cron.daily/logcheck
 
 %clean
 rm -fr %buildroot
