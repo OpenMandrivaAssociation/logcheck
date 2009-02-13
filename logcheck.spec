@@ -6,6 +6,9 @@ License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://alioth.debian.org/frs/download.php/1677/%{name}_%{version}.tar.gz
+Requires:   lockfile-progs
+Requires:   nail
+Requires:   sendmail-command
 BuildRoot:	%_tmppath/%name-%version
 
 %description
@@ -34,6 +37,12 @@ chmod 755 %buildroot/%_sysconfdir/cron.daily/logcheck
 %clean
 rm -fr %buildroot
 
+%pre
+%_pre_useradd logcheck /var/lib/logcheck /bin/false
+
+%postun
+%_postun_userdel logcheck
+
 %files
 %defattr(-,root,root)
 %doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO
@@ -41,6 +50,5 @@ rm -fr %buildroot
 %config(noreplace) %_sysconfdir/logcheck
 %_sbindir/logcheck
 %_sbindir/logtail
-%attr(0700,root,root) %dir %{_localstatedir}/lib/%name
-
-
+%attr(-,logcheck,logcheck) %dir %{_localstatedir}/lock/%name
+%attr(0700,logcheck,logcheck) %dir %{_localstatedir}/lib/%name
