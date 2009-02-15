@@ -1,11 +1,12 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.2.45
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://alioth.debian.org/frs/download.php/1677/%{name}_%{version}.tar.gz
+BuildRequires: docbook-to-man
 Requires:   lockfile-progs
 Requires:   nail
 Requires:   sendmail-command
@@ -24,8 +25,15 @@ firewall package.  TIS has granted permission for me to clone this package.
 %prep
 %setup -q
 
+%build
+cd docs
+docbook-to-man logcheck.sgml > logcheck.8
+
 %install
 %makeinstall_std
+
+install -d %buildroot%_mandir/man8
+install -m 644 docs/*.8 %buildroot%_mandir/man8
 
 install -d %buildroot/%_sysconfdir/cron.daily/
 cat > %buildroot/%_sysconfdir/cron.daily/logcheck <<EOF
@@ -45,10 +53,12 @@ rm -fr %buildroot
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO
+%doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO docs/README.*
 %config(noreplace) %_sysconfdir/cron.daily/logcheck
 %config(noreplace) %_sysconfdir/logcheck
 %_sbindir/logcheck
 %_sbindir/logtail
+%_mandir/man8/logcheck.8*
+%_mandir/man8/logtail.8*
 %attr(-,logcheck,logcheck) %dir %{_localstatedir}/lock/%name
 %attr(0700,logcheck,logcheck) %dir %{_localstatedir}/lib/%name
