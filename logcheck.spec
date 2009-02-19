@@ -36,11 +36,9 @@ install -d %buildroot%_mandir/man8
 install -m 644 docs/*.8 %buildroot%_mandir/man8
 
 install -d %buildroot/%_sysconfdir/cron.daily/
-cat > %buildroot/%_sysconfdir/cron.daily/logcheck <<EOF
-#!/bin/sh
-%{_sbindir}/logcheck
+cat > %buildroot/%_sysconfdir/cron.d/logcheck <<EOF
+2 * * * * logcheck %{_sbindir}/logcheck
 EOF
-chmod 755 %buildroot/%_sysconfdir/cron.daily/logcheck
 
 %clean
 rm -fr %buildroot
@@ -54,7 +52,7 @@ rm -fr %buildroot
 %files
 %defattr(-,root,root)
 %doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO docs/README.*
-%config(noreplace) %_sysconfdir/cron.daily/logcheck
+%config(noreplace) %_sysconfdir/cron.d/logcheck
 %config(noreplace) %_sysconfdir/logcheck
 %_sbindir/logcheck
 %_sbindir/logtail
