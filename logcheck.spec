@@ -35,7 +35,7 @@ docbook-to-man logcheck.sgml > logcheck.8
 install -d %buildroot%_mandir/man8
 install -m 644 docs/*.8 %buildroot%_mandir/man8
 
-install -d %buildroot/%_sysconfdir/cron.daily/
+install -d %buildroot/%_sysconfdir/cron.d
 cat > %buildroot/%_sysconfdir/cron.d/logcheck <<EOF
 2 * * * * logcheck %{_sbindir}/logcheck
 EOF
