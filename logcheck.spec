@@ -1,7 +1,7 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.2.45
-Release:	%mkrel 4
+Version:	1.3.2
+Release:	%mkrel 1
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
@@ -53,10 +53,13 @@ rm -fr %buildroot
 %defattr(-,root,root)
 %doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO docs/README.*
 %config(noreplace) %_sysconfdir/cron.d/logcheck
-%config(noreplace) %_sysconfdir/logcheck
+%config(noreplace) %attr(-,root,logcheck) %_sysconfdir/logcheck
 %_sbindir/logcheck
 %_sbindir/logtail
+%_sbindir/logtail2
+%_datadir/logtail
 %_mandir/man8/logcheck.8*
 %_mandir/man8/logtail.8*
+%_mandir/man8/logtail2.8*
 %attr(-,logcheck,logcheck) %dir %{_localstatedir}/lock/%name
 %attr(0700,logcheck,logcheck) %dir %{_localstatedir}/lib/%name
