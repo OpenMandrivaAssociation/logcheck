@@ -43,7 +43,7 @@ cat > %buildroot/%_sysconfdir/cron.d/logcheck <<EOF
 2 * * * * logcheck %{_sbindir}/logcheck
 EOF
 
-cat README.urpmi <<EOF
+cat > README.urpmi <<EOF
 Mandriva package notes
 ----------------------
 In order to finish installation, you have to ensure the logcheck user has read
