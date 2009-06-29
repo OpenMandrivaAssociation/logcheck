@@ -1,11 +1,13 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.3.2
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://alioth.debian.org/frs/download.php/1677/%{name}_%{version}.tar.gz
+# mandriva mail command doesn't use -a flag for inserting headers
+Patch0:     logcheck-1.3.2-fix-mail-command-args.patch
 BuildRequires: docbook-to-man
 Requires:   lockfile-progs
 Requires:   nail
@@ -24,6 +26,7 @@ firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 cd docs
@@ -40,6 +43,13 @@ cat > %buildroot/%_sysconfdir/cron.d/logcheck <<EOF
 2 * * * * logcheck %{_sbindir}/logcheck
 EOF
 
+cat README.urpmi <<EOF
+Mandriva package notes
+----------------------
+In order to finish installation, you have to ensure the logcheck user has read
+access to all log files listed in %_sysconfdir/logcheck/logcheck.logfiles
+EOF
+
 %clean
 rm -fr %buildroot
 
@@ -51,7 +61,7 @@ rm -fr %buildroot
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO docs/README.*
+%doc AUTHORS CHANGES CREDITS INSTALL LICENSE TODO docs/README.* README.urpmi
 %config(noreplace) %_sysconfdir/cron.d/logcheck
 %config(noreplace) %attr(-,root,logcheck) %_sysconfdir/logcheck
 %_sbindir/logcheck
