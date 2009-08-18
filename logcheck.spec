@@ -1,11 +1,11 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.2
-Release:	%mkrel 2
+Version:	1.3.3
+Release:	%mkrel 1
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
-Source:		http://alioth.debian.org/frs/download.php/1677/%{name}_%{version}.tar.gz
+Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
 # mandriva mail command doesn't use -a flag for inserting headers
 Patch0:     logcheck-1.3.2-fix-mail-command-args.patch
 BuildRequires: docbook-to-man
@@ -25,7 +25,7 @@ frequentcheck.sh script from the Trusted Information Systems Gauntlet(tm)
 firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 %patch0 -p1
 
 %build
