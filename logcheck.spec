@@ -1,6 +1,6 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.3
+Version:	1.3.5
 Release:	%mkrel 1
 License:	GPL
 Group:		Monitoring
@@ -25,7 +25,7 @@ frequentcheck.sh script from the Trusted Information Systems Gauntlet(tm)
 firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
-%setup -q -n %{name}
+%setup -q 
 %patch0 -p1
 
 %build
