@@ -1,17 +1,16 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.5
+Version:	1.3.6
 Release:	%mkrel 1
 License:	GPL
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-# mandriva mail command doesn't use -a flag for inserting headers
-Patch0:     logcheck-1.3.2-fix-mail-command-args.patch
 BuildRequires: docbook-to-man
 Requires:   lockfile-progs
 Requires:   nail
 Requires:   sendmail-command
+Requires:   mime-construct
 BuildRoot:	%_tmppath/%name-%version
 
 %description
@@ -26,7 +25,6 @@ firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
 %setup -q 
-%patch0 -p1
 
 %build
 cd docs
