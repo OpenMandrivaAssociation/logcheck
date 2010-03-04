@@ -1,16 +1,16 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.6
+Version:	1.3.7
 Release:	%mkrel 1
-License:	GPL
+License:	GPLv2
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-BuildRequires: docbook-to-man
-Requires:   lockfile-progs
-Requires:   nail
-Requires:   sendmail-command
-Requires:   mime-construct
+BuildRequires:	docbook-to-man
+Requires:	lockfile-progs
+Requires:	nail
+Requires:	sendmail-command
+Requires:	mime-construct
 BuildRoot:	%_tmppath/%name-%version
 
 %description
@@ -64,6 +64,7 @@ rm -fr %buildroot
 %config(noreplace) %attr(-,root,logcheck) %_sysconfdir/logcheck
 %_sbindir/logcheck
 %_sbindir/logtail
+%_bindir/logcheck-test
 %_sbindir/logtail2
 %_datadir/logtail
 %_mandir/man8/logcheck.8*
