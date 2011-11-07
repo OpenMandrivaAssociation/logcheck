@@ -1,12 +1,12 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.13
+Version:	1.3.14
 Release:	%mkrel 1
 License:	GPLv2
 Group:		Monitoring
 URL:		http://logcheck.org/
 Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-BuildRequires:	docbook-to-man
+#BuildRequires:	docbook-to-man
 Requires:	lockfile-progs
 Requires:	nail
 Requires:	sendmail-command
@@ -24,7 +24,7 @@ frequentcheck.sh script from the Trusted Information Systems Gauntlet(tm)
 firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 cd docs
