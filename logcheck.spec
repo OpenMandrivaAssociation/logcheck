@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.3.15
