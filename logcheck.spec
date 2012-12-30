@@ -1,17 +1,16 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.13
-Release:	%mkrel 1
+Version:	1.3.15
+Release:	1
 License:	GPLv2
 Group:		Monitoring
 URL:		http://logcheck.org/
-Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
+Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/logcheck_1.3.15.tar.gz
 BuildRequires:	docbook-to-man
 Requires:	lockfile-progs
 Requires:	nail
 Requires:	sendmail-command
 Requires:	mime-construct
-BuildRoot:	%_tmppath/%name-%version
 
 %description
 Logcheck is a software package that is designed to automatically run and check 
@@ -24,7 +23,7 @@ frequentcheck.sh script from the Trusted Information Systems Gauntlet(tm)
 firewall package.  TIS has granted permission for me to clone this package.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 cd docs
@@ -49,7 +48,6 @@ access to all log files listed in %_sysconfdir/logcheck/logcheck.logfiles
 EOF
 
 %clean
-rm -fr %buildroot
 
 %pre
 %_pre_useradd logcheck /var/lib/logcheck /bin/false
@@ -163,6 +161,7 @@ rm -fr %buildroot
 * Sun Jan 01 2006 Mandriva Linux Team <http://www.mandrivaexpert.com/> 1.1.1-11mdk
 - Rebuild
 
-* Wed Mar 09 2005 Nicolas Lécureuil <neoclust@mandrake.org> 1.1.1-10mdk
+* Wed Mar 09 2005 Nicolas LÃ©cureuil <neoclust@mandrake.org> 1.1.1-10mdk
 - security fix for CAN-2004-0404
+
 
