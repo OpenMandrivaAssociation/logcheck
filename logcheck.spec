@@ -3,7 +3,7 @@
 Name:		logcheck
 Summary:	Psionic LogCheck
 Version:	1.3.15
-Release:	3
+Release:	4
 License:	GPLv2
 Group:		Monitoring
 URL:		http://logcheck.org/
