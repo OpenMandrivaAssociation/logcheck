@@ -2,12 +2,12 @@
 
 Name:		logcheck
 Summary:	Psionic LogCheck
-Version:	1.3.17
-Release:	3
+Version:	1.4.7
+Release:	1
 License:	GPLv2
 Group:		Monitoring
 URL:		https://logcheck.org/
-Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/logcheck_1.3.17.tar.xz
+Source:		http://ftp.de.debian.org/debian/pool/main/l/logcheck/logcheck_1.4.7.tar.xz
 BuildRequires:	docbook-to-man
 Requires:	lockfile-progs
 Requires:	nail
